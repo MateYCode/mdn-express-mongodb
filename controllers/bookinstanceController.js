@@ -1,6 +1,6 @@
-var BookInstance = require("../models/bookinstance");
-var Book = require('../models/book');
-var async = require('async');
+let BookInstance = require("../models/bookinstance");
+let Book = require('../models/book');
+let async = require('async');
 const { body, validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
 // Display list of all BookInstances.
@@ -26,7 +26,7 @@ exports.bookinstance_detail = function (req, res) {
     .exec(function (err, bookinstance) {
       if (err) { return next(err); }
       if (bookinstance == null) { // No results.
-        var err = new Error('Book copy not found');
+        let err = new Error('Book copy not found');
         err.status = 404;
         return next(err);
       }
@@ -68,7 +68,7 @@ exports.bookinstance_create_post = [
     const errors = validationResult(req);
 
     // Create a BookInstance object with escaped and trimmed data.
-    var bookinstance = new BookInstance(
+    let bookinstance = new BookInstance(
       {
         book: req.body.book,
         imprint: req.body.imprint,
@@ -122,7 +122,7 @@ exports.bookinstance_update_get = function (req, res, next) {
   BookInstance.findById(req.params.id).populate('book').exec((err, results) => {
     if (err) { return next(err); }
     if (results._id == null) { // No results.
-      var err = new Error('Book Instance not found');
+      let err = new Error('Book Instance not found');
       err.status = 404;
       return next(err);
     }
@@ -155,7 +155,7 @@ exports.bookinstance_update_post = [
     const errors = validationResult(req);
 
     // Create a Book Instance object with escaped/trimmed data and old id.
-    var bookinstance = new BookInstance(
+    let bookinstance = new BookInstance(
       {
         book: req.body.book,
         imprint: req.body.imprint,
@@ -170,7 +170,7 @@ exports.bookinstance_update_post = [
       BookInstance.findById(req.params.id).populate('book').exec((err, results) => {
         if (err) { return next(err); }
         if (results._id == null) { // No results.
-          var err = new Error('Book Instance not found');
+          let err = new Error('Book Instance not found');
           err.status = 404;
           return next(err);
         }

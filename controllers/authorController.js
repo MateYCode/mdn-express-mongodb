@@ -1,6 +1,6 @@
 const Author = require('../models/author');
 const Book = require('../models/book');
-var async = require('async');
+let async = require('async');
 const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
 
@@ -31,7 +31,7 @@ module.exports = {
         }, function(err, results) {
             if (err) { return next(err); } // Error in API usage.
             if (results.author==null) { // No results.
-                var err = new Error('Author not found');
+                let err = new Error('Author not found');
                 err.status = 404;
                 return next(err);
             }
@@ -77,7 +77,7 @@ module.exports = {
                 // Data from form is valid.
     
                 // Create an Author object with escaped and trimmed data.
-                var author = new Author(
+                let author = new Author(
                     {
                         first_name: req.body.first_name,
                         family_name: req.body.family_name,
